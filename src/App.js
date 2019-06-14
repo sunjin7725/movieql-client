@@ -1,22 +1,25 @@
-import React, {Component} from 'react';
-import {HashRouter as Router, Route} from "react-router-dom"
-import {ApolloProvider} from "react-apollo";
+import React, { Component } from "react";
+import { HashRouter as Router, Route } from "react-router-dom";
+import { ApolloProvider } from "react-apollo";
+import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
 import client from "./apolloClient";
-import Detail from "./Detail";
 import Home from "./Home";
+import Detail from "./Detail";
 
 class App extends Component {
-  render(){
+  render() {
     return (
-        <ApolloProvider client={client}>
+      <ApolloProvider client={client}>
+        <ApolloHooksProvider client={client}>
           <Router>
-            <React.Fragment>
-              <Route exact={true} path={"/"} component={Home}></Route>
-              <Route path={"/details/:movieId"} component={Detail}></Route>
-            </React.Fragment>
+            <main>
+              <Route exact={true} path={"/"} component={Home} />
+              <Route path={"/details/:movieId"} component={Detail} />
+            </main>
           </Router>
-        </ApolloProvider>
-      );
+        </ApolloHooksProvider>
+      </ApolloProvider>
+    );
   }
 }
 
